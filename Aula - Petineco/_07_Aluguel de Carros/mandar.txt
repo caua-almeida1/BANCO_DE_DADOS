@@ -1,0 +1,61 @@
+CREATE TABLE "tb_cliente"(
+	"cliente_id" INTEGER,
+	"nome" TEXT NOT NULL,
+	"cnh" TEXT,
+	"telefone" TEXT,
+	PRIMARY KEY ("cliente_id" AUTOINCREMENT)
+);
+
+
+CREATE TABLE "tb_veiculo"(
+	"veiculo_id" INTEGER,
+	"modelo" TEXT NOT NULL,
+	"ano" TEXT BNOT NULL,
+	"placa" TEXT NOT NULL,
+	"disponibilidade" TEXT NOT NULL,
+	PRIMARY KEY ("veiculo_id" AUTOINCREMENT)
+);
+
+CREATE TABLE "tb_aluguel"(
+	"aluguel_id" INTEGER,
+	"cliente_id" TEXT NOT NULL,
+	"veiculo_id" TEXT NOT NULL,
+	"data_inicio" TEXT NOT NULL,
+	"data_fim" TEXT NOT NULL,
+	PRIMARY KEY ("aluguel_id" AUTOINCREMENT)
+);
+
+INSERT INTO "tb_cliente" (nome, cnh, telefone)
+
+VALUES
+	('Daniel', '0123456789', '94677-8464'),
+	('Bruno', '123456789', '98865-5553'),
+	('Cauã', '9876543210', '25235-5456'),
+	('Murilo', '4665554775', '93322-1583'),
+	('Marcelo', '2254835456', '93252-6625'),
+	('Rafael', '6687893586', '94585-4389'),
+	('Kayque', '9992212352', '90055-9443'),
+	('Emilly', '9980563157', '97856-2208'),
+	('Yollanda', '1135987522', '98662-8852'),
+	('Samantha', '4654654852', '99202-2004');
+
+INSERT INTO "tb_veiculo" (modelo, ano, placa, disponibilidade)
+
+VALUES
+	('Volkswagen Golf GTI', '2022', 'ABC-1234','450'),
+	('Ford Mustang', '2021', 'DEF-5678', '908'),
+	('Toyota Corolla', '2020', 'GHI-9012', '306'),
+	('Honda Civic', ' 2023', 'JKL-3456', '950'),
+	('Chevrolet Cruze', '2022', 'MNO-7890', '1006'),
+	('Nissan Altima', '2021', 'PQR-2345', '560'),
+	('BMW 3 Series', '2020', 'STU-6789', '141'),
+	('Mercedes-Benz C-Class', '2023', 'VWX-4567','722'),
+	('Audi A4', '2022', 'YZA-8901', '2036'),
+	('Hyundai Elantra', '2021', 'BCD-6789', '830');
+
+SELECT * FROM tb_cliente WHERE telefone = "94677-8464";	
+SELECT * FROM tb_cliente WHERE cnh = "123456789";
+SELECT nome,cnh FROM tb_cliente	
+
+
+

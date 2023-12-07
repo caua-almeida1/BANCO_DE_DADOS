@@ -1,0 +1,180 @@
+CREATE TABLE "tb_mesas" (
+	"mesa_id"	INTEGER,
+	"numero"	TEXT NOT NULL,
+	"capacidade"	TEXT NOT NULL,
+	PRIMARY KEY ("mesa_id" AUTOINCREMENT)
+);
+
+CREATE TABLE "tb_pedidos" (
+	"pedido_id" INTEGER,
+	"mesa_id" INTEGER,
+	"produto_id" INTEGER,
+	"quantidade" INTEGER,
+	"total"	REAL,
+	PRIMARY KEY (pedido_id AUTOINCREMENT),
+	FOREIGN KEY ("mesa_id") REFERENCES tb_mesas ("mesa_id"),
+	FOREIGN KEY ("produto_id") REFERENCES tb_produtos ("produto_id")
+);
+
+CREATE TABLE "tb_produtos" (
+	"produto_id"	INTEGER,
+	"nome"	TEXT NOT NULL,
+	"tipo"	TEXT NOT NULL,
+	"preco"	TEXT NOT NULL,
+	"descricao"	TEXT NOT NULL,
+	PRIMARY KEY (produto_id AUTOINCREMENT)
+);
+
+INSERT INTO "tb_mesas" ("numero","capacidade") VALUES 
+ ('1','4');
+
+INSERT INTO "tb_produtos" ("produto_id","nome","tipo","preco","descricao") VALUES 
+(1,'Frango Grelhado','Prato Principal','15.99','Peito de frango grelhado com legumes.'),
+ (2,'Coca-Cola','Bebida','2.5','Refrigerante de cola gelado.'),
+ (3,'Tiramisu','Sobremesa','6.99','Sobremesa italiana com café e queijo mascarpone.'),
+ (4,'Salada Caesar','Prato Principal','9.99','Salada de alface, croutons e molho Caesar.'),
+ (5,'Suco de Laranja','Bebida','3.0','Suco natural de laranja.'),
+ (6,'Cheesecake de Morango','Sobremesa','7.99','Cheesecake com cobertura de morango.'),
+ (7,'Lasanha','Prato Principal','12.99','Lasanha de carne com molho de tomate e queijo.'),
+ (8,'Água Mineral','Bebida','1.5','Água mineral sem gás.');
+
+INSERT INTO "tb_mesas" ("numero", "capacidade") VALUES
+('2', '4'),
+('3', '2'),
+('4', '6'),
+('5', '4'),
+('6', '2'),
+('7', '6'),
+('8', '4'),
+('9', '2'),
+('10', '4'),
+('11', '6');
+
+INSERT INTO "tb_pedidos" ("mesa_id", "produto_id", "quantidade", "total") VALUES
+('1', '1', '2', '31.98'),
+('1', '3', '1', '6.99'),
+('2', '4', '1', '9.99'),
+('2', '6', '2', '15.98'),
+('3', '2', '3', '7.5'),
+('3', '7', '1', '12.99'),
+('4', '1', '2', '31.98'),
+('4', '8', '4', '6.0'),
+('5', '5', '1', '3.0'),
+('5', '3', '2', '13.98');
+
+
+SELECT * FROM "tb_produtos" 
+WHERE "tipo" = 'Prato Principal';
+
+SELECT * FROM "tb_mesas" 
+WHERE "numero" = '3';
+
+SELECT "nome", "tipo", "preco"
+FROM "tb_produtos";
+
+SELECT * FROM tb_mesas WHERE capacidade > 6
+
+
+SELECT
+    tb_produtos.nome,
+    tb_produtos.tipo,
+    tb_produtos.preco,
+    tb_mesas.numero,
+    tb_mesas.capacidade, 
+    tb_pedidos.pedido_id, 
+    tb_pedidos.quantidade,
+    tb_pedidos.total
+	
+FROM
+    tb_pedidos
+	
+INNER JOIN tb_produtos ON tb_pedidos.produto_id = tb_produtos.produto_id
+
+INNER JOIN tb_mesas ON tb_pedidos.mesa_id = tb_mesas.mesa_id;
+
+SELECT
+    tb_produtos.nome,
+    tb_produtos.tipo,
+    tb_produtos.preco,
+    tb_mesas.numero,
+    tb_mesas.capacidade,
+    tb_pedidos.pedido_id,
+    tb_pedidos.quantidade,
+    tb_pedidos.total
+	
+FROM tb_pedidos
+
+INNER JOIN tb_produtos ON tb_pedidos.produto_id = tb_produtos.produto_id
+INNER JOIN tb_mesas ON tb_pedidos.mesa_id = tb_mesas.mesa_id
+
+WHERE tb_pedidos.total = 50;
+
+SELECT
+    tb_produtos.nome AS "Nome do Produto",
+    tb_produtos.tipo AS "Tipo 	do Produto",
+    tb_produtos.preco AS "Preço do Produto",
+    tb_mesas.numero AS "Número da Mesa",
+    tb_mesas.capacidade AS "Capacidade da Mesa",
+    tb_pedidos.pedido_id AS "ID do Pedido",
+    tb_pedidos.quantidade AS "Quantidade",
+    tb_pedidos.total AS "Total"
+FROM
+    tb_pedidos
+INNER JOIN tb_produtos ON tb_pedidos.produto_id = tb_produtos.produto_id
+INNER JOIN tb_mesas ON tb_pedidos.mesa_id = tb_mesas.mesa_id
+WHERE
+    tb_pedidos.total > 20;
+
+
+UPDATE "tb_produtos"
+SET "preco" = '17.99'
+WHERE "produto_id" = 1;
+
+UPDATE "tb_produtos"
+SET "descricao" = 'Nova descrição do produto.'
+WHERE "produto_id" = 3;
+
+UPDATE "tb_produtos"
+SET "tipo" = 'Nova categoria'
+WHERE "produto_id" = 5;
+
+UPDATE "tb_produtos"
+SET "nome" = 'Novo nome do produto'
+WHERE "produto_id" = 7;
+
+UPDATE "tb_produtos"
+SET "preco" = '8.99'
+WHERE "produto_id" = 9;
+
+
+DELETE FROM "tb_pedidos"
+WHERE "pedido_id" = 1;
+
+DELETE FROM "tb_pedidos"
+WHERE "pedido_id" = 3;
+
+DELETE FROM "tb_pedidos"
+WHERE "pedido_id" = 5;
+
+DELETE FROM "tb_pedidos"
+WHERE "pedido_id" = 7;
+
+DELETE FROM "tb_pedidos"
+WHERE "pedido_id" = 9;
+
+
+--NOVOS EXEMPLOS PROFS--
+
+SELECT sum(total) FROM tb_pedidos;
+
+SELECT COUNT(*) AS "Todos os Produtos" FROM tb_mesas
+WHERE capacidade = 4;
+
+SELECT * FROM tb_produtos
+ORDER BY produto_id DESC
+
+SELECT "numero", "capacidade";
+SELECT * FROM tb_mesas WHERE mesa_id BETWEEN 1 AND 5;
+
+
+
