@@ -31,6 +31,7 @@ CREATE TABLE Servico_Pneu (
 );
 
 
+--Populando Tabelas
 
 INSERT INTO Pneu (NumeroSerie, Marca, Modelo, Dimensoes, QuantidadeEmEstoque) VALUES
     (1, 'Michelin', 'Pilot Sport 4', '205/55R16', 50),
@@ -56,3 +57,6 @@ INSERT INTO Servico_Pneu (NumeroOrdemServico, NumeroSeriePneu) VALUES
     (2, 3),
     (3, 1),
     (3, 3);
+
+
+
